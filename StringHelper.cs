@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -124,6 +125,28 @@ namespace Nimaime.Helper.Data
 		public static string GetCombinedString<T>(this List<T> list, char splitter)
 		{
 			return string.Join(splitter.ToString(), list);
+		}
+
+		/// <summary>
+		/// 计算字符串MD5
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public static string MD5Hash(this string input)
+		{
+			using (MD5 md5 = MD5.Create())
+			{
+				byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+				byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+				StringBuilder stringBuilder = new StringBuilder();
+				for (int i = 0; i < hashBytes.Length; i++)
+				{
+					stringBuilder.Append(hashBytes[i].ToString("x2"));
+				}
+
+				return stringBuilder.ToString().ToUpper();
+			}
 		}
 	}
 }
