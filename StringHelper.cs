@@ -12,6 +12,16 @@ namespace Nimaime.Helper.Data
 	public static class StringHelper
 	{
 		/// <summary>
+		/// 测试字符串是否为IP地址（IPv4）
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		public static bool IsIpAddress(string str)
+		{
+            return Regex.IsMatch(str, @"^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$");
+		}
+
+		/// <summary>
 		/// 删除字符串特殊符号
 		/// </summary>
 		/// <param name="str"></param>
